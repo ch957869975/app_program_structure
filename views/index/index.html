@@ -29,11 +29,12 @@
 				<span class="mui-tab-label">我的</span>
 			</a>
 		</nav>
+
 		<script src="../../lib/mui.min.js"></script>
 		<script src="../../lib/moment.js"></script>
+		<script src="../../lib/immersed.js"></script>
 		<script>
 			mui.init();
-
 			var Index = {
 				initPage: function() {
 					// 重写mui.back()
@@ -53,13 +54,13 @@
 					};
 					// 子webview创建，以及导航跳转逻辑
 					var self = plus.webview.currentWebview();
-					var subpages = ['index-subpage-app.html', 'index-subpage-msg.html', 'index-subpage-main.html', 'index-subpage-mine.html'];
+					var subpages = ['index-subpage-main.html','index-subpage-msg.html', 'index-subpage-app.html',  'index-subpage-mine.html'];
 					var subpage_style = { // 子webview样式
 						top: '0px',
-						bottom: '51px'
+						bottom: /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375) ? '78px':'50px'
 					};
 					var aniShow = {};
-					//创建子页面，首个选项卡页面显示，其它均隐藏；
+			//创建子页面，首个选项卡页面显示，其它均隐藏；
 					for(var i = 0; i < subpages.length; i++) {
 						var temp = {};
 						var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);

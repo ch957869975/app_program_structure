@@ -3,6 +3,5 @@
  */
 
 window.GlOBAL_CONFIG = {
-    //超时时间
-    timeOut: 30000,
+  timeOut: 10000 //超时时间
 }

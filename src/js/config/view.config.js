@@ -4,11 +4,10 @@
  */
 
 window.VIEW_CONFIG = {
-	//登录页面
-	login: {
-		url: '../login/login.html',
-		id: 'login',
-		title: '登录'
-	},
-
+  //登录页面
+  login: {
+    url: '../login/login.html',
+    id: 'login',
+    title: '登录'
+  }
 }

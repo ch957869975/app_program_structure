@@ -2,24 +2,17 @@
  * @Author: chenghao 
  * @Date: 2018-12-07 16:47:34 
  * @Last Modified by: chenghao
- * @Last Modified time: 2018-12-07 16:48:47
+ * @Last Modified time: 2018-12-10 15:33:56
+ * @desc: 首页主屏幕样式
  */
 
 @import '../app.less';
-// 首页子页面——应用面板样式
-/*首页开始*/
-.mui-slider-indicator .mui-active.mui-indicator {
-  background-color: #007aff;
-}
-.mui-card-footer:before,
-.mui-card-header:after {
-  height: 0;
-}
-.mui-card .mui-card-header {
-  color: #007aff;
-  font-size: 28px;
-}
 
-.u-text-hidden {
-  color: #333;
+.indexBottom {
+  .mui-tab-item.mui-active {
+    color: @footerNavColor;
+  }
+  span.mui-tab-label {
+    font-size: 14px;
+  }
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>登录</title>
+    <link rel="stylesheet" href="../../assets/css/mui.min.css" />
+    <link rel="stylesheet" href="../../assets/css/iconfont.css" />
+    <link rel="stylesheet" href="../../assets/css/page/login.css" />
+  </head>
+  <body>
+    <div id="login_page" class="g_login_container">
+      <div class="m_login_form">
+        <img class="u_logo" src="../../assets/images/login/logo.png" alt="应用logo" />
+        <h2 class="u_title font-bold">阜宁视频智能运维</h2>
+        <div class="m_form">
+          <div class="u_username"></div>
+          <div class="u_password"></div>
+          <span @click.stop="forget" class="u_forget mb20 fr mr20 font-bold">忘记密码</span>
+          <button
+            @click.stop="login"
+            class="u_login_btn"
+            type="button"
+            data-loading-icon="mui-spinner mui-spinner-custom"
+            class="mui-btn mui-btn-primary"
+          >
+            立即登录
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="../../lib/common.js"></script>
+    <script src="../../lib/mui.min.js"></script>
+    <script src="../../lib/immersed.js"></script>
+    <script src="../../lib/vue.min.js"></script>
+    <script src="../../assets/js/page/login.js"></script>
+  </body>
+</html>

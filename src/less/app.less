@@ -5,9 +5,10 @@
 @import './mixin/base.less';
 @import './mixin/image.less';
 @font-face {
-  font-family: -apple-system, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Arial, sans-serif;
+  font-family: pingfang;
   font-weight: normal;
   font-style: normal;
+  src: url('../../fonts/pingfang.ttf') format('truetype');
 }
 
 html,
@@ -15,7 +16,68 @@ body,
 .mui-input-row label {
   font-family: pingfang;
 }
-
+html,
+body {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.mr10 {
+  margin-right: 10px;
+}
+.mr15 {
+  margin-right: 15px;
+}
+.mr20 {
+  margin-right: 20px;
+}
+.ml10 {
+  margin-left: 10px;
+}
+.ml15 {
+  margin-left: 15px;
+}
+.ml20 {
+  margin-left: 20px;
+}
+.mt10 {
+  margin-top: 10px;
+}
+.mt15 {
+  margin-top: 15px;
+}
+.mt20 {
+  margin-top: 20px;
+}
+.mb10 {
+  margin-bottom: 10px;
+}
+.mb15 {
+  margin-bottom: 15px;
+}
+.mb20 {
+  margin-bottom: 20px;
+}
+.fr {
+  float: right;
+}
+.fl {
+  float: left;
+}
+.f-clearfix {
+  display: block;
+  &:after {
+    display: block;
+    content: '.';
+    height: 0;
+    line-height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+.font-bold {
+  font-weight: 700;
+}
 [v-cloak] {
   display: none;
 }

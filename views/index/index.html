@@ -1,133 +1,135 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>首页父页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../../assets/css/mui.min.css" />
+    <link rel="stylesheet" href="../../assets/css/iconfont.css" />
+    <link rel="stylesheet" href="../../assets/css/page/index.css" />
+  </head>
 
-	<head>
-		<meta charset="utf-8">
-		<title>首页父页面</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-		<link rel="stylesheet" href="../../assets/css/mui.min.css">
-		<link rel="stylesheet" href="../../assets/css/iconfont.css" />
-		<link rel="stylesheet" href="../../assets/css/page/index.css" />
-	</head>
+  <body>
+    <nav class="mui-bar mui-bar-tab indexBottom">
+      <a id="defaultTab" class="mui-tab-item mui-active" href="index-subpage-main.html">
+        <span class="mui-icon iconfont icon-jinridaiban"><!-- <span class="mui-badge">2</span> --></span>
+        <span class="mui-tab-label font-bold">待办</span>
+      </a>
+      <a class="mui-tab-item" href="index-subpage-msg.html">
+        <span class="mui-icon iconfont icon-message1"> <span class="mui-badge">3</span> </span>
+        <span class="mui-tab-label font-bold">消息</span>
+      </a>
+      <a class="mui-tab-item" href="index-subpage-app.html">
+        <span class="mui-icon iconfont icon-erji-gongdanguanli"></span>
+        <span class="mui-tab-label font-bold">工单</span>
+      </a>
+      <a class="mui-tab-item" href="index-subpage-mine.html">
+        <span class="mui-icon iconfont icon-custom-user"></span> <span class="mui-tab-label font-bold">我的</span>
+      </a>
+    </nav>
 
-	<body>
-		<nav class="mui-bar mui-bar-tab indexBottom">
-			<a id="defaultTab" class="mui-tab-item mui-active" href="index-subpage-main.html">
-				<span class="mui-icon iconfont icon-cascades"><!--<span class="mui-badge">2</span>--></span>
-				<span class="mui-tab-label">首页</span>
-			</a>
-			<a class="mui-tab-item" href="index-subpage-msg.html">
-				<span class="mui-icon iconfont icon-mark"><span class="mui-badge">3</span></span>
-				<span class="mui-tab-label">消息</span>
-			</a>
-			<a class="mui-tab-item" href="index-subpage-app.html">
-				<span class="mui-icon iconfont icon-circle"></span>
-				<span class="mui-tab-label">应用</span>
-			</a>
-			<a class="mui-tab-item" href="index-subpage-mine.html">
-				<span class="mui-icon iconfont icon-people"></span>
-				<span class="mui-tab-label">我的</span>
-			</a>
-		</nav>
+    <script src="../../lib/mui.min.js"></script>
+    <script src="../../lib/moment.js"></script>
+    <script src="../../lib/immersed.js"></script>
+    <script>
+      mui.init()
+      var Index = {
+        initPage: function() {
+          // 重写mui.back()
+          var first = null
+          mui.back = function() {
+            if (!first) {
+              first = new Date().getTime()
+              mui.toast('再按一次退出应用')
+              setTimeout(function() {
+                first = null
+              }, 2000)
+            } else {
+              if (new Date().getTime() - first < 2000) {
+                plus.runtime.quit()
+              }
+            }
+          }
+          // 子webview创建，以及导航跳转逻辑
+          var self = plus.webview.currentWebview()
+          var subpages = [
+            'index-subpage-main.html',
+            'index-subpage-msg.html',
+            'index-subpage-app.html',
+            'index-subpage-mine.html'
+          ]
+          var subpage_style = {
+            // 子webview样式
+            top: '0px',
+            bottom:
+              /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375) ? '78px' : '50px'
+          }
+          var aniShow = {}
+          //创建子页面，首个选项卡页面显示，其它均隐藏；
+          for (var i = 0; i < subpages.length; i++) {
+            var temp = {}
+            var sub = plus.webview.create(subpages[i], subpages[i], subpage_style)
+            if (i > 0) {
+              sub.hide()
+            } else {
+              temp[subpages[i]] = 'true'
+              mui.extend(aniShow, temp)
+            }
+            self.append(sub)
+          }
 
-		<script src="../../lib/mui.min.js"></script>
-		<script src="../../lib/moment.js"></script>
-		<script src="../../lib/immersed.js"></script>
-		<script>
-			mui.init();
-			var Index = {
-				initPage: function() {
-					// 重写mui.back()
-					var first = null;
-					mui.back = function() {
-						if(!first) {
-							first = new Date().getTime();
-							mui.toast('再按一次退出应用');
-							setTimeout(function() {
-								first = null;
-							}, 2000);
-						} else {
-							if(new Date().getTime() - first < 2000) {
-								plus.runtime.quit();
-							}
-						}
-					};
-					// 子webview创建，以及导航跳转逻辑
-					var self = plus.webview.currentWebview();
-					var subpages = ['index-subpage-main.html','index-subpage-msg.html', 'index-subpage-app.html',  'index-subpage-mine.html'];
-					var subpage_style = { // 子webview样式
-						top: '0px',
-						bottom: /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375) ? '78px':'50px'
-					};
-					var aniShow = {};
-			//创建子页面，首个选项卡页面显示，其它均隐藏；
-					for(var i = 0; i < subpages.length; i++) {
-						var temp = {};
-						var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
-						if(i > 0) {
-							sub.hide();
-						} else {
-							temp[subpages[i]] = "true";
-							mui.extend(aniShow, temp);
-						}
-						self.append(sub);
-					}
+          //当前激活选项
+          var activeTab = subpages[0]
+          //选项卡点击事件
+          mui('.mui-bar-tab').on('tap', 'a', function(e) {
+            var targetTab = this.getAttribute('href')
+            if (targetTab == activeTab) {
+              return
+            }
+            //显示目标选项卡
+            //若为iOS平台或非首次显示，则直接显示
+            if (mui.os.ios || aniShow[targetTab]) {
+              plus.webview.show(targetTab)
+            } else {
+              //否则，使用fade-in动画，且保存变量
+              var temp = {}
+              temp[targetTab] = 'true'
+              mui.extend(aniShow, temp)
+              plus.webview.show(targetTab, 'fade-in', 300)
+            }
+            //隐藏当前;
+            plus.webview.hide(activeTab)
+            //更改当前活跃的选项卡
+            activeTab = targetTab
+          })
+        },
+        bindEventHandler: function() {
+          var _this = this
+          //自定义事件，模拟点击“首页选项卡”
+          window.addEventListener('gohome', function() {
+            var defaultTab = document.getElementById('defaultTab')
+            //模拟首页点击
+            mui.trigger(defaultTab, 'tap')
+            //切换选项卡高亮
+            var current = document.querySelector('.mui-bar-tab>.mui-tab-item.mui-active')
+            if (defaultTab !== current) {
+              current.classList.remove('mui-active')
+              defaultTab.classList.add('mui-active')
+            }
+          })
+        },
+        init: function() {
+          this.initPage() // 初始化页面
+          this.bindEventHandler() // 绑定事件
+        }
+      }
 
-					//当前激活选项
-					var activeTab = subpages[0];
-					//选项卡点击事件
-					mui('.mui-bar-tab').on('tap', 'a', function(e) {
-
-						var targetTab = this.getAttribute('href');
-						if(targetTab == activeTab) {
-							return;
-						}
-						//显示目标选项卡
-						//若为iOS平台或非首次显示，则直接显示
-						if(mui.os.ios || aniShow[targetTab]) {
-							plus.webview.show(targetTab);
-						} else {
-							//否则，使用fade-in动画，且保存变量
-							var temp = {};
-							temp[targetTab] = "true";
-							mui.extend(aniShow, temp);
-							plus.webview.show(targetTab, "fade-in", 300);
-						}
-						//隐藏当前;
-						plus.webview.hide(activeTab);
-						//更改当前活跃的选项卡
-						activeTab = targetTab;
-					});
-				},
-				bindEventHandler: function() {
-					var _this = this;
-					//自定义事件，模拟点击“首页选项卡”
-					window.addEventListener('gohome', function() {
-						var defaultTab = document.getElementById("defaultTab");
-						//模拟首页点击
-						mui.trigger(defaultTab, 'tap');
-						//切换选项卡高亮
-						var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
-						if(defaultTab !== current) {
-							current.classList.remove('mui-active');
-							defaultTab.classList.add('mui-active');
-						}
-					});
-
-				},
-				init: function() {
-					this.initPage(); // 初始化页面
-					this.bindEventHandler(); // 绑定事件
-				}
-			}
-
-			mui.plusReady(function() {
-				plus.webview.currentWebview().setStyle({
-					'popGesture': 'none'
-				});
-				Index.init();
-			});
-		</script>
-	</body>
-
+      mui.plusReady(function() {
+        plus.webview.currentWebview().setStyle({
+          popGesture: 'none'
+        })
+        Index.init()
+      })
+    </script>
+  </body>
 </html>

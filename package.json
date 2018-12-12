@@ -1,26 +1,39 @@
 {
   "name": "monitor_app",
   "version": "1.0.0",
-  "description": "",
+  "description": "智能运维系统app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "gulp watch",
+    "build": "gulp default"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "root@192.168.1.23:HD_FRONTEND/Security_app.git"
   },
-  "author": "",
+  "author": "HD_FRONTEND",
   "license": "ISC",
   "devDependencies": {
-    "gulp-postcss": "^7.0.1",
-    "gulp-strip-debug": "^3.0.0",
-    "pump": "^3.0.0",
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-remove-strict-mode": "0.0.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^8.0.0",
+    "browserify": "^16.2.3",
+    "event-stream": "^4.0.1",
+    "glob": "^7.1.3",
     "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1",
     "gulp-clean-css": "^3.7.0",
-    "gulp-concat": "^2.6.1",
     "gulp-less": "^3.3.2",
+    "gulp-postcss": "^7.0.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-strip-debug": "^3.0.0",
     "gulp-uglify": "^3.0.0",
-    "postcss-px-to-viewport": "0.0.3"
-  }
+    "postcss-px-to-viewport": "0.0.3",
+    "pump": "^3.0.0",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "dependencies": {}
 }
